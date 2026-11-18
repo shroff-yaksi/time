@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Galway–India Time</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=Source+Sans+3:wght@400;600;700&display=swap">
+<style>
+/* 30 Oct 2026: dark label-maker look, same as START_HERE */
+:root{
+  --desk:#141312; --drawer:#1c1b19; --edge:#34312c; --fg:#ece6dc; --muted:#a39b8f;
+  --tape:"IBM Plex Mono",ui-monospace,monospace; --body:"Source Sans 3",-apple-system,"Segoe UI",sans-serif;
+  --pink:#ec4899; --orange:#f97316; --yellow:#eab308; --teal:#14b8a6;
+  color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box}
+html,body{min-height:100%}
+body{margin:0;background:var(--desk);color:var(--fg);font-family:var(--body);font-size:16px;
+  background-image:radial-gradient(rgba(220,200,170,.06) 1px,transparent 1.2px);background-size:14px 14px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1180px;margin:0 auto;padding-block:30px 46px;display:flex;flex-direction:column;gap:20px}
+
+/* label tape */
+.tapelbl,.places button,.tag,.answer .big{font-family:var(--tape);text-transform:uppercase;letter-spacing:.14em;font-weight:600;color:#fff;
+  text-shadow:0 1px 0 rgba(0,0,0,.5),0 -1px 0 rgba(255,255,255,.15);
+  background:linear-gradient(180deg,rgba(255,255,255,.14),rgba(255,255,255,0) 45%,rgba(0,0,0,.16)),repeating-linear-gradient(90deg,rgba(255,255,255,.035) 0 2px,rgba(0,0,0,.03) 2px 4px),var(--c,#16171a);
+  border:0;border-radius:3px;box-shadow:0 1px 0 rgba(255,255,255,.2) inset,0 2px 3px rgba(0,0,0,.4)}
+h1{margin:0}
+h1 .tapelbl{display:inline-block;font-size:clamp(1.2rem,4.6vw,1.7rem);padding:11px 18px 10px;transform:rotate(-1deg);--c:#0e0e10}
+.sub1{margin:10px 0 0;color:var(--muted);font-family:var(--tape);font-size:.74rem;letter-spacing:.1em;text-transform:uppercase}
+
+/* drawers */
+.panel,.city{background:var(--drawer);border:1.5px solid var(--edge);border-radius:12px;box-shadow:0 2px 0 #0b0a09,0 12px 26px -18px #000;position:relative}
+.panel{padding:30px 18px 18px;display:flex;flex-direction:column;gap:16px}
+.panel::before{content:"";position:absolute;top:10px;left:50%;width:46px;height:6px;margin-left:-23px;border-radius:6px;background:var(--edge)}
+.places{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.places button{font-size:.72rem;padding:9px 4px 8px;cursor:pointer;min-width:0;opacity:.6;transition:transform .15s,opacity .15s}
+.places button:nth-child(1){--c:#9d1f5a}.places button:nth-child(2){--c:#b4520f}.places button:nth-child(3){--c:#9a7408}.places button:nth-child(4){--c:#0f7a6f}
+.places button:nth-child(odd){transform:rotate(-.6deg)}.places button:nth-child(even){transform:rotate(.5deg)}
+.places button:hover{opacity:.9}
+.places button[aria-pressed="true"]{opacity:1;transform:translateY(-3px) scale(1.04)}
+.row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px}
+label{display:flex;flex-direction:column;gap:6px;font-family:var(--tape);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);min-width:0}
+input{display:block;width:100%;max-width:100%;min-width:0;font-family:var(--tape);font-size:1.1rem;font-weight:500;padding:10px 12px;border:1.5px dashed var(--edge);border-radius:8px;background:#151413;color:var(--fg);-webkit-appearance:none;appearance:none;color-scheme:dark}
+input:focus-visible,button:focus-visible{outline:2px solid var(--yellow);outline-offset:2px}
+.quick{display:flex;flex-wrap:wrap;gap:8px}
+.quick button{font-family:var(--tape);font-size:.8rem;border:1.5px solid var(--edge);background:#151413;color:var(--fg);border-radius:4px;padding:6px 12px;cursor:pointer}
+.quick button:hover{border-color:var(--muted)}
+.quick #now{background:var(--yellow);border-color:var(--yellow);color:#1a1405;font-weight:600}
+
+/* the answer: one big printed label */
+.answer{display:flex;flex-direction:column;gap:8px;align-items:flex-start}
+.answer .lbl{font-family:var(--tape);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.answer .big{--c:#b4520f;font-size:clamp(2.4rem,11vw,3.4rem);line-height:1;padding:12px 20px 10px;letter-spacing:.08em;transform:rotate(-1.2deg);font-variant-numeric:tabular-nums}
+.answer .sub{color:var(--muted)}
+.who{font-weight:700;color:var(--fg)}
+
+.skies{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.city{overflow:hidden;display:flex;flex-direction:column}
+.city.src{border-color:var(--yellow)}
+.city svg{display:block;width:100%;height:auto}
+.city .info{padding:10px 14px 12px;display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap}
+.city .name{font-family:var(--tape);font-weight:600;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase}
+.city .t{font-family:var(--tape);font-weight:600;font-size:1.4rem;font-variant-numeric:tabular-nums}
+.city .d{width:100%;font-size:.85rem;color:var(--muted);display:flex;justify-content:space-between;align-items:center;gap:6px}
+.tag{font-size:.6rem;padding:3px 7px 2px;--c:#3a3631}
+.tag.on{--c:#15803d}
+.slab{gap:8px}
+.slab .ends{display:flex;justify-content:space-between;font-size:.7rem}
+input[type=range]{padding:0;border:0;background:transparent;height:34px;-webkit-appearance:none;appearance:none}
+input[type=range]::-webkit-slider-runnable-track{height:10px;border-radius:3px;background:linear-gradient(90deg,#1f3466 0%,#3c5a97 20%,#f472b6 25%,#eab308 35%,#eab308 68%,#f97316 75%,#36508f 85%,#1f3466 100%)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:24px;height:24px;margin-top:-7px;border-radius:4px;background:#ece6dc;border:3px solid #0e0e10;box-shadow:0 2px 4px rgba(0,0,0,.5)}
+input[type=range]::-moz-range-track{height:10px;border-radius:3px;background:linear-gradient(90deg,#1f3466 0%,#3c5a97 20%,#f472b6 25%,#eab308 35%,#eab308 68%,#f97316 75%,#36508f 85%,#1f3466 100%)}
+input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:4px;background:#ece6dc;border:3px solid #0e0e10}
+.note{font-size:.85rem;color:var(--muted);margin:0;text-align:center}
+@media (max-width:380px){.skies{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 30 Oct: bigger, two columns, easy to use */
+.main{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:22px;align-items:stretch}
+.panel{gap:22px;padding:34px 24px 24px}
+.places button{font-size:.95rem;padding:16px 6px 14px}
+label{font-size:.8rem;gap:8px}
+input{font-size:1.6rem;padding:16px 16px}
+input[type=range]{height:44px}
+input[type=range]::-webkit-slider-runnable-track{height:16px}
+input[type=range]::-webkit-slider-thumb{width:34px;height:34px;margin-top:-9px}
+.slab .ends{font-size:.85rem}
+.quick{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px}
+.quick button{font-size:1.05rem;padding:14px 4px}
+.answer{background:var(--drawer);border:1.5px solid var(--edge);border-radius:12px;box-shadow:0 2px 0 #0b0a09,0 12px 26px -18px #000;padding:30px 24px;justify-content:center;align-items:center;text-align:center;gap:18px}
+.answer .lbl{font-size:.85rem}
+.answer .big{font-size:clamp(3.4rem,7vw,6rem);padding:18px 26px 14px;max-width:100%}
+@media (max-width:860px){.main{grid-template-columns:minmax(0,1fr)}.quick{grid-template-columns:repeat(3,minmax(0,1fr))}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <h1><span class="tapelbl">Galway · India · Time</span></h1>
+    <p class="sub1">Pick a place, type a time, see it everywhere</p>
+  </header>
+
+  <div class="main">
+  <div class="panel">
+    <div class="places" role="group" aria-label="Time is in" id="places"></div>
+    <div class="row">
+      <label for="t">Time<input id="t" type="time" value="19:30"></label>
+      <label for="d">Date<input id="d" type="date"></label>
+    </div>
+    <label for="slider" class="slab">Drag through the day
+      <input id="slider" type="range" min="0" max="1425" step="15" value="1170">
+      <span class="ends"><span>00:00</span><span>12:00</span><span>23:45</span></span>
+    </label>
+    <div class="quick" aria-label="Quick times">
+      <button data-q="09:00">9:00</button><button data-q="12:00">12:00</button>
+      <button data-q="15:30">15:30</button><button data-q="19:00">19:00</button>
+      <button data-q="21:00">21:00</button><button id="now">Now</button>
+    </div>
+  </div>
+
+  <div class="answer" aria-live="polite">
+    <span class="lbl" id="ansLbl">Your local time</span>
+    <span class="big" id="ans">--:--</span>
+  </div>
+  </div>
+
+</div>
+
+<script>
+const ZONES=[
+  {k:"uk",name:"UK & Ireland",short:"UK",tz:"Europe/London"},
+  {k:"in",name:"India",short:"India",tz:"Asia/Kolkata"},
+  {k:"ny",name:"New York",short:"New York",tz:"America/New_York"},
+  {k:"sy",name:"Sydney",short:"Sydney",tz:"Australia/Sydney"}
+];
+const byK=Object.fromEntries(ZONES.map(z=>[z.k,z]));
+const local=Intl.DateTimeFormat().resolvedOptions().timeZone;
+let src="in";
+try{const s=localStorage.getItem("tb-src4");if(byK[s])src=s}catch(e){}
+
+function offsetMs(tz,ts){
+  const p=Object.fromEntries(new Intl.DateTimeFormat("en-GB",{timeZone:tz,hourCycle:"h23",year:"numeric",month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit",second:"2-digit"}).formatToParts(new Date(ts)).map(x=>[x.type,x.value]));
+  return Date.UTC(+p.year,+p.month-1,+p.day,+p.hour,+p.minute,+p.second)-Math.floor(ts/1000)*1000;
+}
+function zonedToUtc(y,mo,d,h,mi,tz){const g=Date.UTC(y,mo-1,d,h,mi);let ts=g-offsetMs(tz,g);return g-offsetMs(tz,ts)}
+const fmtT=(ts,tz)=>new Intl.DateTimeFormat("en-GB",{timeZone:tz,hour:"2-digit",minute:"2-digit",hourCycle:"h23"}).format(ts);
+const fmtD=(ts,tz)=>new Intl.DateTimeFormat("en-GB",{timeZone:tz,weekday:"short",day:"numeric",month:"short"}).format(ts);
+const pad=n=>String(n).padStart(2,"0");
+function todayIn(tz){const p=Object.fromEntries(new Intl.DateTimeFormat("en-CA",{timeZone:tz,year:"numeric",month:"2-digit",day:"2-digit"}).formatToParts(new Date()).map(x=>[x.type,x.value]));return `${p.year}-${p.month}-${p.day}`}
+function nameOf(tz){if(tz==="Europe/Dublin"||tz==="Europe/London")return"UK & Ireland";const z=ZONES.find(z=>z.tz===tz);return z?z.name:tz.split("/").pop().replace(/_/g," ")}
+
+// sky colours by hour (no purple): night navy, dawn pink-peach, day blue, dusk orange-pink
+function sky(h){
+  if(h<5||h>=20.5) return {top:"#1f3466",bot:"#3c5a97",label:"Night",ground:"#2a3f6e"};
+  if(h<7)  return {top:"#ffb3a7",bot:"#ffe2b8",label:"Sunrise",ground:"#f6c79a"};
+  if(h<17) return {top:"#7cc4ff",bot:"#d4ecff",label:"Daytime",ground:"#a8dba0"};
+  if(h<19) return {top:"#ff8f70",bot:"#ffd08a",label:"Sunset",ground:"#e9a77a"};
+  return {top:"#36508f",bot:"#ff9f8a",label:"Evening",ground:"#3a4f80"};
+}
+function cardSVG(k,h){
+  const s=sky(h); const isDay=h>=6&&h<18;
+  const t=isDay?(h-6)/12:(((h-18)+24)%24)/12;
+  const a=Math.PI*(1-t), cx=100, cy=86, r=66;
+  const x=cx+r*Math.cos(a), y=cy-r*Math.sin(a);
+  const stars=isDay?"":[[24,20],[52,34],[150,18],[176,40],[120,12],[84,22]].map(([sx,sy])=>`<circle cx="${sx}" cy="${sy}" r="1.4" fill="#fff" opacity=".85"/>`).join("");
+  const body=isDay
+    ? `<circle cx="${x}" cy="${y}" r="17" fill="#ffc93c" opacity=".3"/><circle cx="${x}" cy="${y}" r="11" fill="#ffc93c"/>`
+    : `<circle cx="${x}" cy="${y}" r="10" fill="#fff7e0"/><circle cx="${x+5}" cy="${y-3}" r="9" fill="${s.top}"/>`;
+  return `<svg viewBox="0 0 200 100" aria-hidden="true">
+    <defs><linearGradient id="g-${k}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${s.top}"/><stop offset="1" stop-color="${s.bot}"/></linearGradient></defs>
+    <rect width="200" height="100" fill="url(#g-${k})"/>${stars}
+    <path d="M${cx-r} ${cy} A ${r} ${r} 0 0 1 ${cx+r} ${cy}" stroke="#ffffff" stroke-opacity=".55" stroke-width="1.5" stroke-dasharray="3 5" fill="none"/>
+    ${body}
+    <path d="M0 86 Q50 76 100 86 T200 84 V100 H0z" fill="${s.ground}"/>
+  </svg>`;
+}
+
+const $=id=>document.getElementById(id);
+$("places").innerHTML=ZONES.map(z=>`<button data-k="${z.k}" id="p-${z.k}">${z.short}</button>`).join("");
+
+function render(){
+  ZONES.forEach(z=>$("p-"+z.k).setAttribute("aria-pressed",z.k===src));
+  const zone=byK[src];
+  const [h,mi]=($("t").value||"00:00").split(":").map(Number);
+  const [y,mo,d]=($("d").value||todayIn(zone.tz)).split("-").map(Number);
+  const ts=zonedToUtc(y,mo,d,h,mi,zone.tz);
+  $("ans").textContent=fmtT(ts,local);
+  $("ansLbl").textContent=`Your local time (${nameOf(local)})`;
+  $("slider").value=h*60+mi;
+  const asleep=[];
+  ZONES.forEach(z=>{
+    const tt=fmtT(ts,z.tz); const hh=+tt.slice(0,2)+(+tt.slice(3))/60;
+    if(!(hh>=8&&hh<22))asleep.push(z.name);
+  });
+}
+$("places").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;src=b.dataset.k;try{localStorage.setItem("tb-src4",src)}catch(e){};render()});
+document.querySelectorAll("[data-q]").forEach(b=>b.addEventListener("click",()=>{$("t").value=b.dataset.q;render()}));
+$("now").addEventListener("click",()=>{const tz=byK[src].tz;const n=Date.now();$("t").value=fmtT(n,tz);$("d").value=todayIn(tz);render()});
+$("t").addEventListener("input",render);
+$("slider").addEventListener("input",()=>{const v=+$("slider").value;$("t").value=pad(Math.floor(v/60))+":"+pad(v%60);render()});$("d").addEventListener("input",render);
+$("d").value=todayIn(byK[src].tz);
+render();
+</script>
+</body>
+</html>
